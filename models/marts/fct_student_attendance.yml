@@ -1,0 +1,20 @@
+version: 2
+
+models:
+  - name: fct_student_attendance
+    description: "Aggregated attendance metrics per student"
+    columns:
+      - name: student_id
+        description: "Unique student identifier"
+        tests:
+          - not_null
+          - unique
+
+      - name: total_days
+        description: "Total attendance days recorded"
+
+      - name: days_present
+        description: "Number of days student was present"
+
+      - name: pct_present
+        description: "Percent of days present"

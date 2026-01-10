@@ -1,0 +1,20 @@
+version: 2
+
+models:
+  - name: stg_attendance
+    description: "Cleaned attendance records at the student-day grain"
+    columns:
+      - name: student_id
+        description: "Unique identifier for a student"
+        tests:
+          - not_null
+
+      - name: attendance_date
+        description: "Date of attendance"
+        tests:
+          - not_null
+
+      - name: attendance_status
+        description: "Attendance status for the day"
+        tests:
+          - not_null
