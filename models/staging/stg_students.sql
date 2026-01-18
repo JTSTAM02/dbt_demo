@@ -1,7 +1,7 @@
 {{ config(materialized='view') }}
 
-select
+select distinct
     student_id,
     grade,
     loaded_at
-from {{ source('raw', 'raw_attendance') }}
+from {{ source('raw', 'raw_students') }}

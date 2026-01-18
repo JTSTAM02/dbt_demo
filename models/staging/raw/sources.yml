@@ -6,6 +6,10 @@ sources:
     schema: raw
 
     tables:
+      - name: raw_students
+        config:
+          loaded_at_field: loaded_at
+          
       - name: raw_attendance
         description: "Raw student attendance records"
         config:                  

@@ -4,18 +4,15 @@
     config(
         target_schema='snapshots',
         unique_key='student_id',
-        strategy='timestamp',
-        updated_at='loaded_at'
+        strategy='check',
+        check_cols=['grade']
     )
 }}
 
 
 select
-    student_id,
-    attendance_date,
-    attendance_status,
-    loaded_at
-from {{ source('raw', 'raw_attendance') }}
+    *
+from {{ ref('stg_students') }}
 
 
 {% endsnapshot %}
