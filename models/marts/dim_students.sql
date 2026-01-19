@@ -1,6 +1,11 @@
 {{ config(materialized='view') }}
 
 select
+    {{ dbt_utils.generate_surrogate_key([
+        'student_id',
+        'dbt_valid_from'
+    ]) }} as student_key,
+    
     student_id,
     grade,
     dbt_valid_from,

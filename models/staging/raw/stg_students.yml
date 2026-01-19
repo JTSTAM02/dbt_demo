@@ -1,0 +1,18 @@
+version: 2
+
+models:
+  - name: stg_students
+    description: "Cleaned student records from raw source"
+    columns:
+      - name: student_id
+        tests:
+          - not_null
+          - unique
+
+      - name: grade
+        tests:
+          - not_null
+
+      - name: loaded_at
+        tests:
+          - not_null
