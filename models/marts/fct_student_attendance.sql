@@ -1,20 +1,36 @@
-{{ config(
+{{ 
+  config(
     materialized='incremental',
-    unique_key='student_id'
-) }}
+    unique_key='student_attendance_id',
+    on_schema_change='fail'
+  ) 
+}}
 
-select
-    student_id,
-    count(*) as attendance_days,
-    max(loaded_at) as loaded_at
-from {{ ref('stg_attendance') }}
+with base as (
 
-{% if is_incremental() %}
-where loaded_at > (
-    select max(loaded_at)
-    from {{ this }}
+    select
+        {{ dbt_utils.generate_surrogate_key([
+            'a.student_id',
+            'a.attendance_date'
+        ]) }} as student_attendance_id,
+
+        a.student_id,
+        s.grade,
+        a.attendance_date,
+        a.attendance_status,
+        a.loaded_at
+
+    from {{ ref('stg_attendance') }} a
+    left join {{ ref('dim_students') }} s
+        on a.student_id = s.student_id
+
+    {% if is_incremental() %}
+        -- Only pull new or updated rows
+        where a.loaded_at > (
+            select max(loaded_at) from {{ this }}
+        )
+    {% endif %}
+
 )
-{% endif %}
 
-group by student_id
-
+select * from base
