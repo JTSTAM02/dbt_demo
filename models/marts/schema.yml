@@ -1,0 +1,70 @@
+version: 2
+
+models:
+
+  - name: dim_students
+    description: >
+      Dimension table representing students with historical grade tracking
+      using dbt snapshots (SCD Type 2).
+
+    columns:
+      - name: student_key
+        description: Surrogate key generated from student_id + dbt_valid_from
+        tests:
+          - unique
+          - not_null
+
+      - name: student_id
+        description: Natural student identifier
+        tests:
+          - not_null
+
+      - name: grade
+        description: Student grade level at that point in time
+
+      - name: is_current
+        description: True if this is the student’s current record
+
+
+  - name: fct_student_attendance
+    description: >
+      Fact table storing daily attendance events for each student.
+      Incremental model keyed by student_attendance_id.
+
+    columns:
+      - name: student_attendance_id
+        description: Unique event key for a student-day attendance record
+        tests:
+          - unique
+          - not_null
+
+      - name: attendance_date
+        description: Date of attendance event
+
+      - name: attendance_status
+        description: Present/Absent/Tardy/etc.
+
+      - name: loaded_at
+        description: Timestamp when record was loaded into raw layer
+
+
+  - name: fct_attendance_daily
+    description: >
+      Aggregated daily attendance metrics by grade.
+      Used for dashboards and reporting.
+
+    columns:
+      - name: attendance_date
+        description: Day being summarized
+
+      - name: attendance_rate
+        description: Percent of records marked Present
+
+
+  - name: fct_attendance_summary
+    columns:
+      - name: attendance_date
+        tests:
+          - unique
+          - not_null
+
