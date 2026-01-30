@@ -1,15 +1,31 @@
-Welcome to your new dbt project!
+# Student Attendance Analytics Warehouse (dbt + Snowflake)
 
-### Using the starter project
+Built an end-to-end analytics engineering pipeline using dbt.
 
-Try running the following commands:
-- dbt run
-- dbt test
+### Features
 
+* Staging models for raw attendance + student data
 
-### Resources:
-- Learn more about dbt [in the docs](https://docs.getdbt.com/docs/introduction)
-- Check out [Discourse](https://discourse.getdbt.com/) for commonly asked questions and answers
-- Join the [chat](https://community.getdbt.com/) on Slack for live discussions and support
-- Find [dbt events](https://events.getdbt.com) near you
-- Check out [the blog](https://blog.getdbt.com/) for the latest news on dbt's development and best practices
+* SCD Type 2 student dimension using dbt snapshots
+
+* Incremental attendance fact table with surrogate keys
+
+* Deduplication logic for late-arriving records
+
+* KPI mart models for daily and grade-level attendance reporting
+
+* dbt tests enforcing uniqueness and data quality
+
+* Documentation site generated with dbt docs
+
+### Tech Stack
+
+* Snowflake
+
+* dbt Core
+
+* Dimensional Modeling
+
+* Incremental Loads
+
+* Analytics Mart Layer
