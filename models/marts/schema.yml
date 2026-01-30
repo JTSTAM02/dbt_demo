@@ -68,3 +68,19 @@ models:
           - unique
           - not_null
 
+
+  - name: attendance_kpi_daily
+    description: Daily attendance KPIs for reporting
+    columns:
+      - name: attendance_date
+        tests:
+          - not_null
+          - unique
+
+  - name: dim_date
+    description: Date spine for analytics reporting
+    columns:
+      - name: date_key
+        tests:
+          - not_null
+          - unique
