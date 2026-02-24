@@ -5,7 +5,8 @@
         target_schema='snapshots',
         unique_key='student_id',
         strategy='check',
-        check_cols=['grade']
+        check_cols=['grade'],
+        invalidate_hard_deletes=True
     )
 }}
 
