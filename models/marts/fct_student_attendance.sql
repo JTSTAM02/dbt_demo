@@ -32,7 +32,9 @@ with base as (
     {% if is_incremental() %}
         -- Only pull new or updated rows
         where a.loaded_at > (
-            select coalesce(max(loaded_at), '1900-01-01') 
+            select coalesce(
+              dateadd('day', -3, max(loaded_at)),
+              '1900-01-01') 
             from {{ this }}
         )
     {% endif %}
