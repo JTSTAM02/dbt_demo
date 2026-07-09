@@ -20,5 +20,11 @@ clean-targets:
 
 models:
   dbt_demo:
-    example:
+    staging:
       +materialized: view
+
+    intermediate:
+      +materialized: view
+
+    marts:
+      +materialized: table
