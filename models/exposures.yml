@@ -6,7 +6,7 @@ description: >
   grade level. Consumed by district leadership and 
   school principals for operational monitoring.
 depends_on:
-  - ref('mart_daily_attendance')
+  - ref('fct_attendance_summary')
   - ref('dim_students')
 owner:
   name: Your Name
