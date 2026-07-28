@@ -16,7 +16,7 @@ Built an end-to-end analytics engineering pipeline using dbt.
 
 * dbt tests enforcing uniqueness and data quality
 
-* Documentation site generated with dbt docs
+* Documentation site generated with dbt docs generate
 
 ### Tech Stack
 
